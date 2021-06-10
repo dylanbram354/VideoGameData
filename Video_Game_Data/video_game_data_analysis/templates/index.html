@@ -19,13 +19,9 @@
 </body>
 <script>
     var ctx = document.getElementById('myChart');
-    let platforms_array = [];
-    {% for platform in all_platforms %}
-        platforms_array.push('{{platform}}');
-    {% endfor %}
     var myChart = new Chart(ctx, {
     type: 'bar',
-    data: {labels: platforms_array,
+    data: {labels: {{all_platforms|safe}},
         datasets: [{
             label: 'Titles per platform',
             data: {{copies}},
