@@ -10,26 +10,40 @@
         <input type="submit" value="Search">
     </form>
 </div>
-{% if game != 'empty' %}
-<br>
-<div class="table-responsive">
-    <table class="table-dark table-striped" style=width:100%">
-        <thead>
-            <tr>
-                {% for key in game %}
-                <th class="col-1">{{key}}</th>
-                {% endfor %}
-            </tr>
-        </thead>
-        <tr>
-            {% for key,value in game.items %}
-            <td>{{value}}</td>
-            {% endfor %}
-        </tr>
-    </table>
-</div>
-{% elif game == 'empty' %}
+{% if game == 'none found' %}
 <br>
 <p class="text-center">There are no games with that title, try again.</p>
+{% elif game is not None %}
+<br>
+<h2 class="text-center">Showing results for {{game.name}}:</h2>
+<div class="table-responsive">
+    <table class="table w-auto small table-striped text-center" style=width:100%">
+        <thead>
+            <tr>
+                <th class="col-1">Rank</th>
+                <th class="col-1">Name</th>
+                <th class="col-1">Platform</th>
+                <th class="col-1">Year</th>
+                <th class="col-1">Genre</th>
+                <th class="col-1">Publisher</th>
+                <th class="col-1">U.S. Sales</th>
+                <th class="col-1">E.U. Sales</th>
+                <th class="col-1">Japan Sales</th>
+                <th class="col-1">Other Sales</th>
+                <th class="col-1">Global Sales</th>
+                <th class="col-1">Version</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                {% for key,value in game.items %}
+                {% if key != '_id' %}
+                <td>{{value}}</td>
+                {% endif %}
+                {% endfor %}
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endif %}
 {% endblock %}
