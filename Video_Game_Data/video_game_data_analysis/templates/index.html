@@ -8,7 +8,7 @@
     Search by game title, *akldfjghad*, or compare publishers' success on each console.
     </p>
     <p>
-        The chart below shows the number of game copies sold worldwide for each console since 2013.
+        The chart below shows the number of game copies, in millions, sold worldwide for each console since 2013.
     </p>
     <div>
         <canvas id="myChart"></canvas>
@@ -19,7 +19,7 @@
     type: 'bar',
     data: {labels: {{all_platforms|safe}},
         datasets: [{
-            label: 'Game Copies per Platform',
+            label: 'Game Copies per Platform (Millions)',
             data: {{copies}},
         }]
     },

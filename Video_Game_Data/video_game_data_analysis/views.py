@@ -47,6 +47,9 @@ def search_by_title(request):
         found_game = 'none found'
         for game in all_games:
             if game['name'].upper() == search.upper():
-                found_game = game
+                if found_game != 'none found':
+                    found_game.append(game)
+                else:
+                    found_game = [game]
         context = {'game': found_game}
         return render(request, 'search_by_title.html', context)

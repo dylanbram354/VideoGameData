@@ -15,7 +15,7 @@
 <p class="text-center">There are no games with that title, try again.</p>
 {% elif game is not None %}
 <br>
-<h2 class="text-center">Showing results for {{game.name}}:</h2>
+<h2 class="text-center">Showing results for {{game.0.name}}</h2>
 <div class="table-responsive">
     <table class="table w-auto small table-striped text-center" style=width:100%">
         <thead>
@@ -35,13 +35,15 @@
             </tr>
         </thead>
         <tbody>
+        {% for entry in game %}
             <tr>
-                {% for key,value in game.items %}
+                {% for key,value in entry.items %}
                 {% if key != '_id' %}
                 <td>{{value}}</td>
                 {% endif %}
                 {% endfor %}
             </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>
