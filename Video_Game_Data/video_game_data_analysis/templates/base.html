@@ -16,7 +16,10 @@
     <div class="container-fluid col justify-content-center">
         <ul class="navbar-nav nav-fill w-100">
             <li class="nav-item">
-                <a href=" " class="btn btn-primary">Search By Title</a>
+                <a href="{% url 'video_game_data_analysis:index' %}" class="btn btn-primary">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'video_game_data_analysis:search_by_title' %}" class="btn btn-primary">Search By Title</a>
             </li>
             <li class="nav-item">
                 <a href=" " class="btn btn-primary">my question</a>
@@ -24,16 +27,13 @@
             <li class="nav-item">
                 <a href=" " class="btn btn-primary">Compare Platforms</a>
             </li>
-            <li class="nav-item">
-                <a href=" " class="btn btn-primary">Home</a>
-            </li>
         </ul>
     </div>
     <div class="col-2"></div>
 </nav>
 <main class="bg-light" style="height:100vh">
-    <div class="container">
-        <h1>{% block header %}{% endblock %}</h1>
+    <div class="container"><br>
+        <h1 class="text-center">{% block header %}{% endblock %}</h1>
         <div class="bg-light">
         {% block content %}
         {% endblock %}

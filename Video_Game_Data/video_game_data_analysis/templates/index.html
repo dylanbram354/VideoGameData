@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
 {% block title %}Home{% endblock %}
-{%block header %}This is my index page!{% endblock %}}
+{%block header %}Welcome to the Video Game Database{% endblock %}}
 
 {% block content %}
-    <p>{{all_platforms}}</p>
-    <p>{{copies}}</p>
-    <p>{{game}}</p>
-    <p>{{message}}</p>
+    <p>
+        Here you will find all the information you need about video game sales over the past 7 years.
+    Search by game title, *akldfjghad*, or compare publishers' success on each console.
+    </p>
+    <p>
+        The chart below shows the number of game copies sold worldwide for each console since 2013.
+    </p>
     <div>
         <canvas id="myChart"></canvas>
     </div>
@@ -30,4 +33,3 @@
 });
 </script>
 {% endblock %}
-</html>

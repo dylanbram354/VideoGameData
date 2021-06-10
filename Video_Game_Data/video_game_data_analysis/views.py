@@ -36,3 +36,18 @@ def index(request):
                'all_platforms': platforms_list,
                'copies': copies_per_platform}
     return render(request, 'index.html', context)
+
+
+def search_by_title(request):
+    found_game = 'empty'
+    context = {'game': found_game}
+    if request.method == 'GET':
+        return render(request, 'search_by_title.html')
+    elif request.method == 'POST':
+        search = request.POST.get('title')
+        all_games = requests.get('https://api.dccresource.com/api/games/').json()
+        for game in all_games:
+            if game['name'].upper() == search.upper():
+                found_game = game
+                context = {'game': found_game}
+        return render(request, 'search_by_title.html', context)

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Search By Title{% endblock %}
+{%block header %}Search By Game Title{% endblock %}}
+
+{% block content %}
+<div class="justify-content-center text-center">
+    <form action="" method="post" class="justify-content-center">
+        {% csrf_token %}
+        Title: <input type="text" name="title" id="title"><br><br>
+        <input type="submit" value="Search">
+    </form>
+</div>
+{% if game != 'empty' %}
+<br>
+<div class="table-responsive">
+    <table class="table-dark table-striped" style=width:100%">
+        <thead>
+            <tr>
+                {% for key in game %}
+                <th class="col-1">{{key}}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tr>
+            {% for key,value in game.items %}
+            <td>{{value}}</td>
+            {% endfor %}
+        </tr>
+    </table>
+</div>
+{% elif game == 'empty' %}
+<br>
+<p class="text-center">There are no games with that title, try again.</p>
+{% endif %}
+{% endblock %}
