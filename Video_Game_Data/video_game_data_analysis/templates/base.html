@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-sm bg-dark">
+    <div class="col-2"></div>
+    <div class="container-fluid col justify-content-center">
+        <ul class="navbar-nav nav-fill w-100">
+            <li class="nav-item">
+                <a href=" " class="btn btn-primary">Search By Title</a>
+            </li>
+            <li class="nav-item">
+                <a href=" " class="btn btn-primary">my question</a>
+            </li>
+            <li class="nav-item">
+                <a href=" " class="btn btn-primary">Compare Platforms</a>
+            </li>
+            <li class="nav-item">
+                <a href=" " class="btn btn-primary">Home</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-2"></div>
+</nav>
+<main class="bg-light" style="height:100vh">
+    <div class="container">
+        <h1>{% block header %}{% endblock %}</h1>
+        <div class="jumbotron">
+        {% block content %}
+        {% endblock %}
+        </div>
+    </div>
+</main>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</html>

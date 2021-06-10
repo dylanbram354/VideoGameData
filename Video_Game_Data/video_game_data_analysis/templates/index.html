@@ -1,29 +1,24 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Home</title>
-</head>
-<body>
-    <h1>This is my index page!</h1>
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{%block header %}This is my index page!{% endblock %}}
+
+{% block content %}
     <p>{{all_platforms}}</p>
     <p>{{copies}}</p>
+    <p>{{game}}</p>
     <p>{{message}}</p>
     <div>
         <canvas id="myChart" width="100" height="100"></canvas>
     </div>
-</body>
+{% endblock %}
+
 <script>
     var ctx = document.getElementById('myChart');
     var myChart = new Chart(ctx, {
     type: 'bar',
     data: {labels: {{all_platforms|safe}},
         datasets: [{
-            label: 'Titles per platform',
+            label: 'Game Copies per Platform',
             data: {{copies}},
         }]
     },
