@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block title %}Compare Publishers{% endblock %}
+{%block header %}Compare Publishers' Success By Platform{% endblock %}}
+
+{% block content %}
+<div class="justify-content-center text-center" style="height:10vh">
+    <form action="" method="post" class="justify-content-center">
+        {% csrf_token %}
+        <label for="platform">Select Platform:</label>
+        <select name="platform" id="platform">
+            {% for item in platforms %}
+            <option value="{{item}}">{{item}}</option>
+            {% endfor %}
+        </select><br>
+        <input type="submit" value="Compare">
+    </form>
+</div>
+{% if chart_data %}
+    <div>
+        <canvas id="myChart1"></canvas>
+    </div>
+    <div>
+        <canvas id="myChart2"></canvas>
+    </div>
+<script>
+    var ctx = document.getElementById('myChart1');
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {labels: {{big_publishers|safe}},
+        datasets: [{
+            label: 'Global Sales Per Publisher (Millions of Units) - Over 5 Million Sales',
+            data: {{big_sales}},
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+<script>
+    var ctx = document.getElementById('myChart2');
+    var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {labels: {{little_publishers|safe}},
+        datasets: [{
+            label: 'Global Sales Per Publisher (Millions of Units) - Fewer Than 5 Million Sales',
+            data: {{little_sales}},
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+{% endif %}
+
+{% endblock %}

@@ -98,3 +98,40 @@ def compare_platforms(request):
                    'chart_data': True}
     return render(request, 'compare_platforms.html', context)
 
+
+def compare_publishers(request):
+    all_games = requests.get('https://api.dccresource.com/api/games/').json()
+    platforms = []
+    for entry in all_games:
+        if entry['platform'] not in platforms:
+            platforms.append(entry['platform'])
+    if request.method == "GET":
+        context = {'platforms': platforms}
+    else:
+        platform = request.POST.get('platform')
+        publisher_sales = {}
+        for game in all_games:
+            if game['platform'] == platform:
+                if game['publisher'] not in publisher_sales:
+                    publisher_sales[game['publisher']] = game['globalSales']
+                else:
+                    publisher_sales[game['publisher']] += game['globalSales']
+        big_publishers = []
+        big_sales = []
+        little_publishers = []
+        little_sales = []
+        for publisher in publisher_sales:
+            if publisher_sales[publisher] > 5:
+                big_publishers.append(publisher)
+                big_sales.append(publisher_sales[publisher])
+            else:
+                little_publishers.append(publisher)
+                little_sales.append(publisher_sales[publisher])
+        context = {'platforms': platforms,
+                   'big_publishers': big_publishers,
+                   'big_sales': big_sales,
+                   'little_publishers': little_publishers,
+                   'little_sales': little_sales,
+                   'chart_data': True}
+    return render(request, 'compare_publishers.html', context)
+

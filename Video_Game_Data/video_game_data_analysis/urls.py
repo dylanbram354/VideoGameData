@@ -5,5 +5,6 @@ app_name = 'video_game_data_analysis'
 urlpatterns = [
     path('', views.index, name='index'),
     path('search_by_title/', views.search_by_title, name='search_by_title'),
-    path('compare_platforms/', views.compare_platforms, name='compare_platforms')
+    path('compare_platforms/', views.compare_platforms, name='compare_platforms'),
+    path('compare_publishers/', views.compare_publishers, name='compare_publishers')
 ]
