@@ -12,14 +12,13 @@ def index(request):
     all_games = requests.get('https://api.dccresource.com/api/games/').json()
     ##^returns a LIST of dictionaries (converted from json)
 
-    game = all_games[1]
-
     platform_dict = {}
     for game in all_games:
-        if game['platform'] not in platform_dict:
-            platform_dict[game['platform']] = game['globalSales']
-        elif game['platform'] in platform_dict:
-            platform_dict[game['platform']] += game['globalSales']
+        if isinstance(game['year'], int) and game['year'] >= 2013:
+            if game['platform'] not in platform_dict:
+                platform_dict[game['platform']] = game['globalSales']
+            elif game['platform'] in platform_dict:
+                platform_dict[game['platform']] += game['globalSales']
 
     platforms_list = []
     copies_per_platform = []
@@ -27,11 +26,7 @@ def index(request):
         platforms_list.append(platform)
         copies_per_platform.append(copies)
 
-    helper_message = requests.get('https://api.dccresource.com/')
-    helper_message = helper_message.json()
-
-    context = {'message': helper_message,
-               'game': game,
+    context = {
                'all_games': all_games,
                'all_platforms': platforms_list,
                'copies': copies_per_platform}

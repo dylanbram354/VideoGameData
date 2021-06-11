@@ -4,7 +4,7 @@
 
 {% block content %}
     <p>
-        Here you will find all the information you need about video game sales over the past 7 years.
+        Here you will find all the information you need about video game sales since 1980.
     Search by game title, compare the number of new titles released on each platform in a given year, or compare publishers' success by console.
     </p>
     <p>
@@ -19,7 +19,7 @@
     type: 'bar',
     data: {labels: {{all_platforms|safe}},
         datasets: [{
-            label: 'Game Copies per Platform (Millions)',
+            label: 'Game Copies per Platform (Millions) Since 2013',
             data: {{copies}},
         }]
     },
