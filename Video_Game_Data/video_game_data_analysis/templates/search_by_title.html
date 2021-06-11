@@ -10,7 +10,9 @@
         <input type="submit" value="Search">
     </form>
 </div>
-{% if game == 'none found' %}
+{% if get %}
+
+{% elif game is None %}
 <br>
 <p class="text-center">There are no games with that title, try again.</p>
 {% elif game is not None %}
