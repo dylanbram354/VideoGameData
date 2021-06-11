@@ -43,13 +43,24 @@ def search_by_title(request):
         return render(request, 'search_by_title.html')
     elif request.method == 'POST':
         search = request.POST.get('title')
+        alphanumeric_search = [character for character in search if character.isalnum()]
+        search = "".join(alphanumeric_search)
         all_games = requests.get('https://api.dccresource.com/api/games/').json()
         found_game = 'none found'
         for game in all_games:
-            if game['name'].upper() == search.upper():
+            alphanumeric = [character for character in game['name'] if character.isalnum()]
+            alphanumeric_game = "".join(alphanumeric)
+            if alphanumeric_game.upper() == search.upper():
                 if found_game != 'none found':
                     found_game.append(game)
                 else:
                     found_game = [game]
-        context = {'game': found_game}
+        platforms = []
+        sales = []
+        for entry in found_game:
+            platforms.append(entry['platform'])
+            sales.append(entry['globalSales'])
+        context = {'game': found_game,
+                   'platforms': platforms,
+                   'sales': sales}
         return render(request, 'search_by_title.html', context)
