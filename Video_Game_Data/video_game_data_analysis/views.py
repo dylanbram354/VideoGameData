@@ -10,7 +10,6 @@ import json
 def index(request):
 
     all_games = requests.get('https://api.dccresource.com/api/games/').json()
-    ##^returns a LIST of dictionaries (converted from json)
 
     platform_dict = {}
     for game in all_games:
@@ -86,6 +85,7 @@ def compare_platforms(request):
                 platform_releases[entry['platform']] = 1
             else:
                 platform_releases[entry['platform']] += 1
+        ## Splitting platform_releases dict into two lists in order to comply with Chart.js parameters:
         platforms = []
         releases = []
         for key in platform_releases:
